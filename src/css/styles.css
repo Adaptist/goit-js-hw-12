@@ -6,6 +6,8 @@
 */
 @import url('./reset.css');
 
+/* ---- LOADER ---- */
+
 .loader {
   width: 106px;
   height: 56px;
@@ -57,7 +59,21 @@ body {
   font-weight: 400;
   line-height: 24px;
   color: #2E2F42;
+}
 
+button {
+  padding: 8px 16px 8px 16px;
+  border-radius: 8px;
+  background-color:#4E75FF;
+  border: 1px solid #4E75FF;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+button:hover,
+button:focus {
+  background-color:#6C8CFF;
 }
 
 /* ---- GALLERY ---- */
@@ -86,23 +102,8 @@ body {
   border: 1px solid #000000;
 }
 
-.form-btn {
-  padding: 8px 16px 8px 16px;
-  border-radius: 8px;
-  background-color:#4E75FF;
-  border: 1px solid #4E75FF;
-
-  font-size: 16px;
-  font-weight: 500;
-  color: #FFFFFF;
-}
-
-.form-btn:hover,
-.form-btn:focus {
-  background-color:#6C8CFF;
-}
-
 /* ---- CARDS ---- */
+
 .gallery {
   margin-top: 32px;
   display: flex;
@@ -115,7 +116,6 @@ body {
   width: 360px;
   border: 1px solid #808080;
 }
-
 
 .gallery-img {
   margin: auto;
@@ -132,4 +132,12 @@ body {
 .sub-list-item {
   margin: auto;
   text-align: center;
+}
+
+/* ---- LOAD MORE BUTTON */
+
+.load-more-btn {
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
 }

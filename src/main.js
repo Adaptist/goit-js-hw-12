@@ -7,7 +7,6 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-// Получаем элементы из DOM
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
@@ -62,7 +61,7 @@ async function loadImages() {
             currentPage++;
             totalHits = data.totalHits;
 
-            // Проверка, достигнут ли конец коллекции
+            // Проверка или достигнут конец коллекции
             if (gallery.children.length >= totalHits) {
                 loadMoreBtn.style.display = 'none';
                 iziToast.info({ message: "We're sorry, but you've reached the end of search results." });
