@@ -7,6 +7,7 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+// Получаем элементы из DOM
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
@@ -19,8 +20,8 @@ let totalHits = 0;
 // Инициализация SimpleLightbox для отображения изображений
 let lightbox = new SimpleLightbox('.gallery a', {});
 
-// Добавление обработчика события на отправку формы
-searchForm.addEventListener('submit', (event) => {
+// Обработчик события отправки формы
+searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     currentQuery = event.currentTarget.elements.query.value.trim();
 
@@ -35,17 +36,21 @@ searchForm.addEventListener('submit', (event) => {
     clearGallery(gallery);
     loadMoreBtn.style.display = 'none';
 
-    // Загрузка изображений
-    loadImages();
+    // Загрузка изображений (передаем false, чтобы не выполнять прокрутку)
+    await loadImages(false);
 });
 
-// Добавление обработчика события на клик по кнопке "Load more"
-loadMoreBtn.addEventListener('click', loadImages);
+// Обработчик клика по кнопке "Load more"
+loadMoreBtn.addEventListener('click', async () => {
+    // Загрузка дополнительных изображений
+    await loadImages(true);
+});
 
 // Функция для загрузки изображений
-async function loadImages() {
-    // Показать индикатор загрузки
+async function loadImages(scrollPage = true) {
+    // Показать индикатор загрузки и скрыть кнопку "Load more"
     loader.style.display = 'block';
+    loadMoreBtn.style.display = 'none';
 
     try {
         // Выполнение запроса к API Pixabay
@@ -69,15 +74,16 @@ async function loadImages() {
                 loadMoreBtn.style.display = 'block';
             }
 
-            // Плавная прокрутка
-            const { height: cardHeight } = gallery.firstElementChild.getBoundingClientRect();
-            window.scrollBy({
-                top: cardHeight * 2,
-                behavior: 'smooth',
-            });
+            // Плавная прокрутка страницы
+            if (scrollPage) {
+                const cardHeight = gallery.firstElementChild.getBoundingClientRect().height;
+                window.scrollBy({
+                    top: cardHeight * 2,
+                    behavior: 'smooth',
+                });
+            }
         }
     } catch (error) {
-        // Обработка ошибок
         iziToast.error({ message: error.message });
     } finally {
         // Скрыть индикатор загрузки

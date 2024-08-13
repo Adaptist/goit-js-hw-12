@@ -67,8 +67,13 @@ button {
   background-color:#4E75FF;
   border: 1px solid #4E75FF;
   color: #FFFFFF;
+  
+  font-family: Montserrat;
   font-size: 16px;
   font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+
 }
 
 button:hover,
@@ -78,6 +83,7 @@ button:focus {
 
 /* ---- GALLERY ---- */
 
+/* ---- INPUT ---- */
 .form {
   display: flex;
   justify-content: center;
@@ -95,11 +101,34 @@ button:focus {
 
   font-size: 16px;
   font-weight: 400;
+  transition: border-color 0.3s;
+  outline: none; /* Убирает стандартный фокус */
 }
 
 .form-input:hover,
 .form-input:focus {
   border: 1px solid #000000;
+}
+
+.form-input:not(:placeholder-shown) {
+  border: 1px solid #4E75FF;
+}
+
+/* Отключение hover и focus при вводе текста */
+.form-input:not(:placeholder-shown):hover,
+.form-input:not(:placeholder-shown):focus {
+  border: 1px solid #4E75FF;
+  outline: none;
+}
+
+.form-input::placeholder {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  text-align: left;
+
 }
 
 /* ---- CARDS ---- */
